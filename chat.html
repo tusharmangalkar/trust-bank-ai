@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trust Bank CBS – AI Banking Assistant</title>
+  <style>
+    html, body {
+      width: 420px;
+      height: 600px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <img src="trust_logo48.png" alt="Logo" class="logo" />
+      <div class="header-text">
+        <div class="title">Trust Bank CBS</div>
+        <div class="subtitle">AI Banking Assistant</div>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="clearBtn" title="Clear chat">
+          🗑️
+        </button>
+      </div>
+    </header>
+    <button id="globalTtsStop" title="Stop voice output">
+      ▶
+    </button>
+    <div class="tabs">
+      <button class="tab active" data-tab="chat">Chat</button>
+    </div>
+    <main class="main-content">
+      <div id="chatTab" class="tab-content active">
+        <div id="chatArea">
+          <div class="welcome-card">
+            <div class="welcome-icon">🏦</div>
+            <h3>Welcome to Trust Bank CBS</h3>
+            <p>
+              Ask questions based on CBS, LMS and Account manuals.
+              Answers are generated from approved banking documents only.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="notesTab" class="tab-content">
+        <div class="notes-panel">
+          <p style="font-size:13px;color:#5a7d8c;">
+            Notes will appear here in future versions.
+          </p>
+        </div>
+      </div>
+    </main>
+    <div class="typing-indicator" id="typingIndicator" style="display:none;">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <span class="typing-text">Processing request…</span>
+    </div>
+    <div class="input-container">
+      <div class="input-area">
+        <textarea
+          id="messageInput"
+          class="input"
+          placeholder="Ask about CBS manuals, loan accounts, LMS..."
+          rows="1"
+          maxlength="500"
+        ></textarea>
+
+        <button class="mic-btn cgpt-mic-btn" id="micBtn" title="Voice input">
+  <svg width="22" height="26" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"
+      fill="#1f2937"
+    />
+    <path
+      d="M19 11a7 7 0 0 1-14 0"
+      stroke="#1f2937"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path
+      d="M12 18v3"
+      stroke="#1f2937"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+  </svg>
+</button>
+        <button class="send-btn" id="sendBtn" title="Send">
+          ➤
+        </button>
+      </div>
+      <div class="lang-row">
+        <div class="lang-select-container">
+          <label>Language:</label>
+          <select id="langSelect">
+            <option value="en-IN">English</option>
+            <option value="hi-IN">हिन्दी</option>
+            <option value="mr-IN">मराठी</option>
+            <option value="ta-IN">தமிழ்</option>
+            <option value="te-IN">తెలుగు</option>
+            <option value="bn-IN">বাংলা</option>
+            (<option value="kn-IN">ಕನ್ನಡ</option>
+          </select>
+        </div>
+        <div class="char-count" id="charCount">0 / 500</div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="status-bar">
+        <span class="dot"></span>
+        <span class="status-text"> Happy to Help</span>
+      </div>
+    </footer>
+    <audio id="audioPlayer" style="display:none;"></audio>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

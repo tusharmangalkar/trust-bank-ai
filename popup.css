@@ -1,0 +1,1402 @@
+* 🚫 Make static texts non-clickable / non-selectable */
+.header-text,
+.subtitle,
+.status-text,
+.lang-select-container label,
+.char-count,
+.source {
+  pointer-events: none;
+  user-select: none;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 420px !important;
+  height: 600px !important;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f7fafc 0%, #e6f6fa 100%);
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #22afd6 0%, #1485b8 100%);
+  padding: 12px 18px;
+  border-bottom: 3px solid #0d6d94;
+  box-shadow: 0 4px 12px rgba(34, 175, 214, 0.25);
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.header-text {
+  flex: 1;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  background: #f7fafc;
+}
+
+.main-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: #22afd6;
+  border-radius: 10px;
+}
+
+.welcome-card {
+  background: linear-gradient(135deg, #fff 0%, #f0f9fc 100%);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(34, 175, 214, 0.2);
+  margin-bottom: 16px;
+}
+
+.welcome-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.welcome-card h3 {
+  color: #477af0;
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.welcome-card p {
+  color: #5a7d8c;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.quick-questions {
+  margin-top: 14px;
+}
+
+.quick-questions p {
+  font-size: 12px;
+  color: #7ba5b8;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.quick-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #22afd6 0%, #1485b8 100%);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(34, 175, 214, 0.3);
+}
+
+.quick-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(34, 175, 214, 0.4);
+}
+
+.chat-bubble {
+  border-radius: 16px;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  max-width: 85%;
+  word-wrap: break-word;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* ===================================== */
+/* ✅ USER BUBBLE — SHRINK TO CONTENT */
+/* ===================================== */
+
+.chat-bubble.user-bubble {
+  max-width: fit-content !important;   /* remove wide empty space */
+  padding: 10px 14px;                  /* slightly tighter */
+  margin-left: auto;                   /* keep right aligned */
+}
+
+/* Ensure text starts from left */
+.chat-bubble.user-bubble .message-content {
+  text-align: left !important;
+}
+
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bot-bubble {
+  background: linear-gradient(135deg, #e6f6fa 0%, #d4eef5 100%);
+  border: 2px solid rgba(34, 175, 214, 0.2);
+  border-radius: 16px 16px 16px 4px;
+  margin-right: auto;
+  color: #194c65;
+  position: relative; /* REQUIRED */
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, #22afd6 0%, #1485b8 100%);
+  color: #fff;
+  border-radius: 16px 16px 4px 16px;
+  margin-left: auto;
+  text-align: left;
+}
+
+.message-content {
+  margin-bottom: 6px;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  margin-top: 6px;
+  gap: 8px;
+}
+
+.bot-bubble .message-meta {
+  color: #5a7d8c;
+}
+
+.user-bubble .message-meta {
+  color: rgba(255, 255, 255, 0.8);
+  justify-content: flex-end;
+}
+
+.source {
+  background: rgba(34, 175, 214, 0.15);
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.time {
+  opacity: 0.7;
+}
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #22afd6;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px);
+  }
+}
+
+.typing-text {
+  font-size: 12px;
+  color: #7ba5b8;
+  font-style: italic;
+}
+
+.input-container {
+  background: #fff;
+  border-top: 2px solid #e0f2f7;
+  padding: 12px 16px 8px 16px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.input-area {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  margin-bottom: 6px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid #22afd6;
+  resize: none;
+  font-size: 14px;
+  color: #133d56;
+  font-family: inherit;
+  background: #f7fafc;
+  transition: all 0.3s ease;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #1485b8;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(34, 175, 214, 0.15);
+}
+
+.mic-btn, .send-btn {
+  background: linear-gradient(135deg, #22afd6 0%, #1485b8 100%);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 8px rgba(34, 175, 214, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mic-btn:hover:not([style*="background-color: rgb(255, 68, 68)"]) {
+  background: linear-gradient(135deg, #14a98c 0%, #0e8b74 100%);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 12px rgba(20, 169, 140, 0.4);
+}
+
+.send-btn {
+  background: linear-gradient(135deg, #14a98c 0%, #0e8b74 100%);
+}
+
+.send-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 12px rgba(20, 169, 140, 0.4);
+}
+
+.send-icon {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 11px;
+  color: #7ba5b8;
+  padding: 0 4px;
+}
+
+.footer {
+  background: linear-gradient(135deg, #deecf2 0%, #d0e5ed 100%);
+  padding: 8px 16px;
+  border-top: 2px solid #b7e5f1;
+  flex-shrink: 0;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #1074a4;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #477af0;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(20, 214, 120, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+.status-text {
+  font-weight: 500;
+}
+
+.lang-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.lang-select-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #7ba5b8;
+}
+
+#langSelect {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid #b7d6e5;
+  background: #f7fafc;
+  color: #133d56;
+}
+
+/* ============================= */
+/* 🔊 TTS BUTTON – FINAL UPDATE */
+/* ============================= */
+
+.bot-bubble .icon-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 38px !important;
+  height: 38 px !important;
+  font-size: 20px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  cursor: pointer;
+
+  background: rgba(34, 175, 214, 0.25);
+  color: #1485b8;
+
+  transition: all 0.2s ease;
+}
+
+.bot-bubble .icon-btn:hover {
+  background: rgba(34, 175, 214, 0.4);
+  transform: scale(1.12);
+}
+
+.bot-bubble .icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* 📐 Text starts just below 🔊 button (content-aware) */
+.bot-bubble .message-content {
+  padding-top: 15px;
+}
+
+.citations {
+  margin-top: 6px;
+  padding-left: 4px;
+}
+
+.citation-chip {
+  background: #eef7fb;
+  border: 1px solid #bcdde9;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* ============================= */
+/* 📘 PROFESSIONAL REFERENCES UI */
+/* ============================= */
+
+.references-box {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f4fbff;
+  border: 1px solid #cfe9f4;
+  border-radius: 10px;
+}
+
+.references-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a0aeb4;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reference-item {
+  background: #ffffff;
+  border: 1px solid #d6ecf6;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.reference-row {
+  display: flex;
+  gap: 6px;
+  font-size: 12px;
+  color: #355f73;
+  margin-top: 2px;
+}
+
+.reference-label {
+  font-weight: 600;
+  color: #929ea4;
+}
+
+.reference-badge {
+  background: #e6f4fb;
+  border: 1px solid #bcdde9;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+/* ===== Compact Reference Style ===== */
+
+.ref-mini-box {
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: #eef7fb;
+  border: 1px solid #cde6f1;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.ref-title {
+  font-weight: 600;
+  color: #869fab;
+  margin-bottom: 4px;
+}
+
+.ref-line {
+  color: #355f73;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.ref-file {
+  font-weight: 500;
+}
+
+.ref-page {
+  margin-left: 6px;
+  color: #71858f;
+  font-weight: 600;
+}
+
+/* 🔥 Disable browser auto scroll anchoring */
+.main-content {
+  overflow-anchor: none;
+}
+
+/* 🔊 Fix speaker button position without affecting text */
+
+.chat-bubble {
+  position: relative;
+}
+
+.chat-bubble .icon-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 5;
+
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+
+  background: #e6f6fb;
+  font-size: 14px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-bubble .icon-btn:hover {
+  background: #d4effa;
+}
+
+/* Disable click only on header text & logo */
+.header .logo,
+.header .header-text {
+    pointer-events: none;
+    cursor: default;
+}
+
+/* KEEP buttons clickable */
+.header .header-actions,
+.header .header-actions * {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* 🚫 Make status bar completely non-clickable */
+.status-bar,
+.status-text,
+.status-bar * {
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+}
+
+/* ⚠️ Small inline warning for empty input */
+.input-warning {
+  position: absolute;
+  bottom: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffeded;
+  color: #b00020;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #f5bcbc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: none;
+  z-index: 999;
+  white-space: nowrap;
+}
+
+.icon-btn i {
+  font-size: 16px;
+  color: #ffffff;
+}
+.icon-btn svg {
+  color: #ffffff;     /* white icon */
+}
+
+.icon-btn:hover svg {
+  color: #ffe5e5;     /* subtle danger hint */
+}
+
+.header-actions .icon-btn {
+  width: 36px;              /* ⬅ slightly larger */
+  height: 36px;
+  border-radius: 50%;       /* perfect circle */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.22); /* soft round background */
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+.header-actions .icon-btn svg {
+  width: 18px;     /* icon size */
+  height: 18px;
+  color: #ffffff; /* white icon */
+}
+
+
+.header-actions .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.08);
+}
+
+
+/* ================================ */
+/* 🔴 GLOBAL TTS STOP BUTTON (BOTTOM-RIGHT — FINAL) */
+/* ================================ */
+
+#globalTtsStop {
+  position: absolute;
+
+  /* 🚫 FORCE REMOVE TOP */
+  top: auto !important;
+
+  /* ✅ FORCE BOTTOM */
+  right: 12px;
+  bottom: 130px;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #4777e7;
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+#globalTtsStop:hover {
+  background: #37e6c6;
+  transform: scale(1.1);
+}
+
+#globalTtsStop:active {
+  transform: scale(0.92);
+}
+
+/* ================================ */
+/* EXACT CHATGPT MIC BUTTON */
+/* ================================ */
+
+.cgpt-mic-btn {
+  width: 44px;
+  height: 44px;
+
+  background: #3bdcc7;     /* exact dark */
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* 🔧 FORCE MIC BUTTON TO BE CLICKABLE */
+.mic-btn.cgpt-mic-btn {
+  pointer-events: auto !important;
+  z-index: 20 !important;
+  position: relative;
+}
+
+/* 🔥 HARD OVERRIDE — MIC MUST NEVER TRANSFORM */
+.mic-btn,
+.mic-btn:hover,
+.mic-btn:active,
+.mic-btn:focus {
+  transform: none !important;
+  background: #54eff1 !important; /* ChatGPT dark */
+}
+
+.mic-btn {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 50;
+}   
+
+.tabs {
+  display: flex;
+  background: #f2f6f9;
+  border-bottom: 1px solid #dbe7ef;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #5a7d8c;
+}
+
+.tab.active {
+  color: #1485b8;
+  border-bottom: 3px solid #1485b8;
+  background: #ffffff;
+}
+
+.tab-content {
+  display: none;
+  height: 100%;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* References panel */
+.references-panel {
+  padding: 12px;
+}
+
+.references-panel h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #0b5d82;
+}
+
+.references-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.references-panel li {
+  background: #ffffff;
+  border: 1px solid #d6ecf6;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+/* ================================ */
+/* 🟦 CBS / ChatGPT STYLE INPUT BAR */
+/* ================================ */
+
+.cbs-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f6f7fb;
+  border-top: 1px solid #e2e6f0;
+}
+
+.input-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 6px 10px;
+  box-shadow: inset 0 0 0 1px #d7dcec;
+}
+
+.cbs-input {
+  flex: 1;
+  border: none;
+  resize: none;
+  font-size: 14px;
+  outline: none;
+  padding: 6px 8px;
+  background: transparent;
+  color: #1f2a44;
+  max-height: 90px;
+}
+
+.cbs-input::placeholder {
+  color: #7b8199;
+}
+
+/* 🎤 Mic inside input */
+.cbs-mic-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px 6px;
+}
+
+.cbs-mic-btn:hover {
+  color: #2563eb;
+}
+
+/* ➤ Send button */
+.cbs-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+}
+
+.cbs-send-btn:hover {
+  background:  #477af0;
+  transform: scale(1.05);
+}
+
+/* ===================================== */
+/* EXACT CBS / CHATGPT INPUT (FIX ONLY) */
+/* ===================================== */
+
+/* Main input container */
+.input-container {
+  padding: 10px 12px;
+  background: #f6f7fb;
+  border-top: 1px solid #e2e6f0;
+}
+
+/* Row holding textarea + buttons */
+.input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Rounded pill */
+.input-area textarea.input {
+  flex: 1;
+  border-radius: 24px;
+  border: 1px solid #d6dbe8;
+  padding: 10px 44px 10px 14px;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  background: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+}
+
+/* Mic INSIDE pill */
+.input-area .mic-btn {
+  position: absolute;
+  right: 68px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.input-area .mic-btn:hover {
+  color: #2563eb;
+}
+
+/* Send button OUTSIDE */
+.input-area .send-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background:  #22afd6;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(37,99,235,0.35);
+}
+
+.input-area .send-btn:hover {
+  background: #1e4ed8;
+  transform: scale(1.05);
+}
+
+/* Needed for absolute mic positioning */
+.input-area {
+  position: relative;
+}
+
+/* ===================================== */
+/* MIC ICON — NO BG, NO HOVER (FINAL) */
+/* ===================================== */
+
+.mic-btn,
+.cbs-mic-btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  padding: 6px;
+  border-radius: 0;          /* ensure NOT circular */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;           /* ⬅️ slightly bigger */
+  line-height: 1;
+
+  color: #14b8a6;            /* teal mic */
+  cursor: pointer;
+}
+
+/* ❌ explicitly disable hover effects */
+.mic-btn:hover,
+.cbs-mic-btn:hover,
+.mic-btn:focus,
+.cbs-mic-btn:focus {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+
+/* ===================================== */
+/* ✅ USER BUBBLE TEXT — LEFT START (STRICT) */
+/* ===================================== */
+
+.chat-bubble.user-bubble .message-content {
+  text-align: left !important;
+  width: auto !important;
+}
+
+/* Ensure bubble itself aligns correctly */
+.chat-bubble.user-bubble {
+  display: block;
+  padding-left: 16px;
+}
+
+/* ================================================= */
+/* 🎨 TRUST BANK CBS — SOFT BANKING THEME (IMG-1) */
+/* CSS ONLY | NO JS | NO HTML */
+/* ================================================= */
+
+/* ===== App Background ===== */
+html, body {
+  background: radial-gradient(
+      120% 120% at 50% -20%,
+      #ffffff 0%,
+      #f3f5f9 45%,
+      #e9edf3 100%
+  ) !important;
+}
+
+/* ===== Header ===== */
+.header {
+  background: linear-gradient(
+    180deg,
+    #f7f8fb 0%,
+    #eceff5 100%
+  ) !important;
+
+  border-bottom: 1px solid #d7dbe3;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.title {
+  color: #1e293b !important;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #64748b !important;
+}
+
+/* Header buttons (rounded soft) */
+.header-actions .icon-btn,
+.header-soft-btn {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #eef1f6 100%
+  ) !important;
+
+  border: 1px solid #d7dce6 !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  color: #475569 !important;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+  background: linear-gradient(
+    180deg,
+    #f6f7fb 0%,
+    #eef1f6 100%
+  ) !important;
+
+  border-bottom: 1px solid #d9dee7;
+}
+
+.tab {
+  color: #64748b !important;
+}
+
+.tab.active {
+  background: transparent !important;
+  color: #1e3a8a !important;
+  border-bottom: 3px solid #3b5bcc !important;
+}
+
+/* ===== Cards / Panels ===== */
+.welcome-card,
+.references-panel,
+.chat-bubble.bot-bubble {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f7f8fb 100%
+  ) !important;
+
+  border: 1px solid #e1e5ee !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}
+
+/* ===== User Bubble (IMG-1 STYLE) ===== */
+.chat-bubble.user-bubble {
+  background: linear-gradient(
+    135deg,
+    #4a6fbf 0%,
+    #3b5ca8 100%
+  ) !important;
+
+  color: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(59,92,168,0.45);
+}
+
+/* ===== Bot Bubble ===== */
+.chat-bubble.bot-bubble {
+  color: #1f2937 !important;
+}
+
+/* ===== Message time ===== */
+.message-meta,
+.time {
+  color: rgba(0,0,0,0.45) !important;
+}
+
+.user-bubble .time {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* ===== Input Area ===== */
+.input-container {
+  background: linear-gradient(
+    180deg,
+    #f6f7fb 0%,
+    #eef1f6 100%
+  ) !important;
+
+  border-top: 1px solid #d7dce6;
+  box-shadow: 0 -6px 18px rgba(0,0,0,0.12);
+}
+
+.input-area textarea.input {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f4f6fb 100%
+  ) !important;
+
+  border: 1px solid #d6dbe5 !important;
+  color: #1f2937 !important;
+}
+
+/* ===== Send Button ===== */
+.input-area .send-btn {
+  background: linear-gradient(
+    135deg,
+    #3b5bcc 0%,
+    #2f4fb5 100%
+  ) !important;
+
+  box-shadow: 0 8px 18px rgba(47,79,181,0.45);
+}
+
+/* ===== Mic Button ===== */
+.mic-btn {
+  color: #3b5bcc !important;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: linear-gradient(
+    180deg,
+    #f2f4f8 0%,
+    #e7ebf2 100%
+  ) !important;
+
+  border-top: 1px solid #d6dbe5;
+}
+
+.status-text {
+  color: #334155 !important;
+}
+
+/* ===== Scrollbar ===== */
+.main-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #c7d2fe 0%,
+    #a5b4fc 100%
+  ) !important;
+}
+/* ================================================= */
+/* 🔊 VOICE OUTPUT ICON — EXACT IMG-1 STYLE */
+/* CSS ONLY | STRICT */
+/* ================================================= */
+
+.chat-bubble.bot-bubble .icon-btn {
+  width: 36px !important;
+  height: 36px !important;
+
+  border-radius: 50% !important;              /* perfect circle */
+  background: linear-gradient(
+    180deg,
+    #f7f8fb 0%,
+    #eceff5 100%
+  ) !important;
+
+  border: 1px solid #d7dbe3 !important;
+
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
+  color: #3b5bcc !important;                  /* blue speaker */
+  font-size: 18px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: 10px !important;
+  right: 10px !important;
+}
+
+/* Hover — subtle lift like IMG-1 */
+.chat-bubble.bot-bubble .icon-btn:hover {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e9edf4 100%
+  ) !important;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,1);
+
+  transform: translateY(-1px);
+}
+
+/* Active (pressed) */
+.chat-bubble.bot-bubble .icon-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.18),
+    inset 0 2px 4px rgba(0,0,0,0.12);
+}
+#clearBtn {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+.header-actions .icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff 0%, #eef1f6 100%);
+  border: 1px solid #d7dce6;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ===== FORCE HEADER ICON VISIBILITY (IMG-2 FIX) ===== */
+
+.header-actions .icon-btn svg {
+  color: #475569 !important;   /* slate grey (matches IMG-2 icons) */
+  fill: currentColor !important;
+}
+
+/* Optional: subtle hover feedback (same as other icons) */
+.header-actions .icon-btn:hover svg {
+  color: #1e293b !important;
+}
+
+/* ================================= */
+/* ⏳ TYPING / WAITING DOTS — IMG-2 */
+/* ================================= */
+
+.typing-dot {
+  background: #94a3b8 !important;   /* soft slate-grey (IMG-2 match) */
+}
+/* 🎤 Mic icon fine positioning */
+.cgpt-mic-btn svg {
+  transform: translateX(3px); /* ⬅️ subtle right shift */
+}
+/* ===================================== */
+/* 🔊 SPEAKER ICON — FLAT (NO CIRCLE) */
+/* ===================================== */
+
+/* remove circular bg / border completely */
+.chat-bubble .icon-btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+/* icon-only button */
+.speaker-btn {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* hover ONLY on icon (no background) */
+.speaker-btn:hover svg {
+  opacity: 0.85;
+}
+
+/* active */
+.speaker-btn:active svg {
+  opacity: 0.7;
+}
+/* ===================================== */
+/* 🔊 SPEAKER BUTTON — NO CIRCLE / NO BG */
+/* ===================================== */
+
+.chat-bubble .icon-btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent text from being pushed */
+.bot-bubble .message-content {
+  padding-top: 0 !important;
+}
+/* ========================================= */
+/* 🔊 SPEAKER ICON — FLOAT, NO TEXT OVERLAP */
+/* ========================================= */
+
+/* Make bot bubble a positioning context */
+.chat-bubble.bot-bubble {
+  position: relative;
+  padding-right: 44px; /* reserve space for speaker */
+}
+
+/* Completely detach speaker from layout */
+.chat-bubble.bot-bubble .icon-btn {
+  position: absolute !important;
+  top: 12px;
+  right: 12px;
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure text never shifts down */
+.chat-bubble.bot-bubble .message-content {
+  padding-top: 0 !important;
+}
+

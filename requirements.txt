@@ -1,0 +1,7 @@
+flask
+flask-cors
+requests
+openai
+gunicorn
+azure-ai-documentintelligence
+azure-core
