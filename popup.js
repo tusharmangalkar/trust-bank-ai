@@ -9,7 +9,7 @@ const quickBtns = document.querySelectorAll('.quick-btn');
 const audioPlayer = document.getElementById('audioPlayer'); 
 const langSelectElement = document.getElementById('langSelect'); // NEW
 
-const BACKEND_URL = 'http://127.0.0.1:5000';
+const BACKEND_URL = '';
 const CHAT_STORAGE_KEY = 'chatHistory';
 const LANG_STORAGE_KEY = 'selectedLanguage';
 
