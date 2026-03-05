@@ -29,15 +29,7 @@ def home():
 @app.route('/<path:filename>')
 def serve_static(filename):
     return send_from_directory('.', filename)
-CORS(app, resources={
-    r"/*": {
-        "origins": [
-            "http://localhost",
-            "http://127.0.0.1",
-            "chrome-extension://*"
-        ]
-    }
-})
+CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
 # ========= AZURE CONFIG =========
